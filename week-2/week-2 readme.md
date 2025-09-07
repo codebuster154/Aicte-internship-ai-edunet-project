@@ -69,3 +69,12 @@ The dataset is the same as Week 1:
 2. Set dataset path:  
    ```python
    root_dir = "/kaggle/input/garbage-classification-v2/garbage-dataset"
+3. Run the notebook cells to:
+  - Train Logistic Regression baseline
+  - Train CNN model
+  - Compare results
+
+✅ The CNN model is saved as:
+garbage_cnn_fast.h5
+
+
