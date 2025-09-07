@@ -1,50 +1,71 @@
-# Garbage Classification - CNN vs Logistic Regression
+# 🗑️ Garbage Classification - Week 2
 
-This project implements **image classification** on a Garbage Dataset using two models:
-- **Logistic Regression** (baseline)
-- **Convolutional Neural Network (CNN)** (deep learning approach)
+This is **Week 2** of the Garbage Classification project.  
+The focus of this week was to **train and test models** (Logistic Regression & CNN), compare their performance, and save results.
+
+---
 
 ## 📂 Dataset
-The dataset is taken from Kaggle:  
+The dataset is the same as Week 1:  
 `/kaggle/input/garbage-classification-v2/garbage-dataset`
 
-It contains multiple classes of garbage images.
+- Contains multiple garbage categories (cardboard, plastic, metal, paper, etc.).  
+- Data is split into training (70%) and validation (30%) using `ImageDataGenerator`.  
+- Images are resized to `32x32` for faster computation.
 
-## ⚙️ Models
-1. **Logistic Regression**  
-   - Uses flattened pixel features.  
-   - Serves as a fast but simple baseline.  
+---
 
-2. **CNN (Convolutional Neural Network)**  
-   - Lightweight architecture with Conv2D and MaxPooling layers.  
-   - Achieves much better accuracy compared to logistic regression.  
+## 🔎 Tasks Completed
 
-## 🚀 Training
-- **Fast Mode:**  
-  Smaller image size (32x32), fewer epochs → faster execution.  
-- **Accurate Mode:**  
-  Larger images (64x64+), more epochs, stronger CNN layers → slower but higher accuracy.  
+### 1. Preprocessing
+- Used **ImageDataGenerator** for:
+  - Rescaling pixel values (`1./255`)  
+  - Splitting dataset into training (70%) and validation (30%)  
+  - Resizing to `(32,32)`  
 
-## 📊 Results
-| Model                | Accuracy |
-|-----------------------|----------|
-| Logistic Regression   | ~X%      |
-| CNN (Fast)            | ~Y%      |
-| CNN (Accurate)        | ~Z%      |
+### 2. Logistic Regression (Improved Baseline)
+- Flattened images into 1D vectors.  
+- Collected ~1000 training samples for Logistic Regression.  
+- Trained with `saga` solver and `max_iter=1000`.  
+- Achieved measurable accuracy on validation data (better than Week 1).  
 
-## 💾 Saved Models
-- `garbage_cnn_fast.h5`  
-- `garbage_cnn_accurate.h5`  
+### 3. Convolutional Neural Network (CNN)
+- Implemented a **light CNN** with:
+  - Two convolution + pooling layers  
+  - One dense hidden layer with dropout  
+  - Softmax output layer  
+- Compiled with **Adam optimizer** and **categorical crossentropy loss**.  
+- Trained for **3 epochs** (fast training).  
+- Evaluated on validation set.  
+
+### 4. Model Comparison
+- Compared Logistic Regression baseline vs CNN.  
+- Plotted training & validation accuracy curves.  
+- CNN clearly outperformed Logistic Regression.  
+
+---
+
+## 📊 Results (Week 2)
+
+- **Logistic Regression (~1000 samples):** Low but non-zero accuracy (baseline).  
+- **CNN (3 epochs):** Significantly higher accuracy, showing that CNN captures image features better.  
+
+📈 Example plot generated:  
+- Blue = CNN Training Accuracy  
+- Orange = CNN Validation Accuracy  
+- Red dashed line = Logistic Regression Accuracy  
+
+---
+
+## 🚀 Next Steps
+- Add a **slower but more accurate CNN mode** (larger images, more filters, more epochs).  
+- Explore **data augmentation** for improving CNN generalization.  
+- Save both **fast model** and **accurate model** for later comparison.  
+
+---
 
 ## 📌 How to Run
-1. Clone this repository
-   ```bash
-   git clone <your_repo_url>
-   cd <your_repo_name>
-2. Run the notebook or Python scripts in your environment (e.g., Kaggle, Colab, local Jupyter).
-3. Commit the README
-If local:
-```bash
-git add README.md
-git commit -m "Added README"
-git push
+1. Open Kaggle Notebook.  
+2. Set dataset path:  
+   ```python
+   root_dir = "/kaggle/input/garbage-classification-v2/garbage-dataset"
